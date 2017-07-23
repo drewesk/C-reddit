@@ -8,8 +8,10 @@ export class NavBar extends Component {
       <div className="cred-navbar">
         <nav>
           <div className="nav-wrapper #ff6e40 deep-orange accent-2">
-            <span className="brand-logo">CReddit</span>
-
+            <span className="brand-logo">
+              <i className="material-icons">tag_faces</i>
+              CReddit
+            </span>
           </div>
         </nav>
 

@@ -7,8 +7,6 @@ import { NavBar } from './components/navbar';
 import { SearchPosts } from './components/search-posts';
 import PostList from './components/post-list';
 import { PostForm } from './components/post-form';
-import { CommentList } from './components/comment-list';
-import { Comment } from './components/comment';
 
 class App extends Component {
     constructor() {
@@ -47,7 +45,11 @@ class App extends Component {
         <NavBar />
         <SearchPosts />
         <div className="right-align">
-          <button className="form-component-button btn-floating btn-large waves-effect waves-light red" onClick={ this.onChangeFormMounted.bind(this) }>add post</button>
+          <button className="form-component-button btn-large waves-effect waves-light red"
+                  onClick={ this.onChangeFormMounted.bind(this) }>
+            <span>New Post</span>
+            <i className="material-icons">add_to_photos</i>
+          </button>
           <div className='form-component-mounted'>
             { formComponent }
           </div>

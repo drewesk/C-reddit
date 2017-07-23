@@ -1,5 +1,5 @@
 import React from 'react';
-import Post from './post';
+import { Post } from './post';
 
 const PostList = (props) => {
   const postItems = props.postListParent.map((item, i) => {

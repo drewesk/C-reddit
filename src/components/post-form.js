@@ -30,7 +30,7 @@ export class PostForm extends Component {
   render() {
 
     return (
-      <div className="cred-post-form right-align">
+      <div className="cred-post-form">
 
         <div className="row">
           <div className="input-field col s6">
@@ -40,11 +40,9 @@ export class PostForm extends Component {
               name="title"
               type="text"
               onChange={(event) => this.onHandleInputChange(event) }/>
-            <label className="active" for="post-title">Title</label>
+            <label className="active" htmlFor="post-title">Title</label>
           </div>
-        </div>
 
-        <div className="row">
           <div className="input-field col s6">
             <input
               className="validate"
@@ -52,7 +50,7 @@ export class PostForm extends Component {
               name="author"
               type="text"
               onChange={(event) => this.onHandleInputChange(event) }/>
-            <label className="active" for="author">Author</label>
+            <label className="active" htmlFor="author">Author</label>
           </div>
         </div>
 
@@ -64,11 +62,9 @@ export class PostForm extends Component {
               name="body"
               type="text"
               onChange={(event) => this.onHandleInputChange(event) }/>
-            <label className="active" for="body">Body</label>
+            <label className="active" htmlFor="body">Body</label>
           </div>
-        </div>
 
-        <div className="row">
           <div className="input-field col s6">
             <input
               className="validate"
@@ -76,11 +72,15 @@ export class PostForm extends Component {
               name="imageUrl"
               type="text"
               onChange={(event) => this.onHandleInputChange(event) }/>
-            <label className="active" for="imageUrl">Image URL</label>
+            <label className="active" htmlFor="imageUrl">Image URL</label>
           </div>
         </div>
 
-        <button onClick={ this.onSubmitForm.bind(this) }>Create Post</button>
+        <a className="btn-floating btn-large waves-effect waves-light red"
+           onClick={ this.onSubmitForm.bind(this) }>
+           <i className="material-icons">add</i>
+         </a>
+
       </div>
     );
   }

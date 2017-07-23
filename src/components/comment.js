@@ -6,7 +6,7 @@ export class Comment extends Component {
 
     return (
       <div className="cred-comment">
-        <h1>I'm a comment component!</h1>
+        <p>{ this.props.commentElements }</p>
       </div>
     );
   }

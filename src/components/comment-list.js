@@ -1,13 +1,21 @@
-import React, { Component } from 'react';
+import React from 'react';
+import { Comment } from './comment';
 
-export class CommentList extends Component {
-
-  render() {
-
+const CommentList = (props) => {
+  const commentItems = props.commentListParent.map((item, i) => {
     return (
-      <div className="cred-comment-list">
-        <h1>I'm a comment list component!</h1>
-      </div>
+      <li key={i + 50} className="comment-items-populate">
+         <Comment commentElements={ item }/>
+      </li>
+
     );
-  }
+  });
+
+  return (
+    <div className="comment-list-items">
+        { commentItems }
+    </div>
+  );
 }
+
+export default CommentList;

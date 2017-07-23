@@ -10,7 +10,7 @@ export class SearchPosts extends Component {
         <div className="row">
           <div className="input-field col s6">
             <input placeholder="Filter" id="search-posts" type="text" className="validate"/>
-            <label className="active" for="search-posts">Seach Posts</label>
+            <label className="active" htmlFor="search-posts">Seach Posts</label>
           </div>
         </div>
 
