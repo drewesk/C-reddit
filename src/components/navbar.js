@@ -6,7 +6,13 @@ export class NavBar extends Component {
 
     return (
       <div className="cred-navbar">
-        <h1>I'm a navigation component!</h1>
+        <nav>
+          <div className="nav-wrapper #ff6e40 deep-orange accent-2">
+            <span className="brand-logo">CReddit</span>
+
+          </div>
+        </nav>
+
       </div>
     );
   }

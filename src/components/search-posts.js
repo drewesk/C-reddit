@@ -6,7 +6,14 @@ export class SearchPosts extends Component {
 
     return (
       <div className="cred-search-posts">
-        <h1>I'm a search component!</h1>
+
+        <div className="row">
+          <div className="input-field col s6">
+            <input placeholder="Filter" id="search-posts" type="text" className="validate"/>
+            <label className="active" for="search-posts">Seach Posts</label>
+          </div>
+        </div>
+
       </div>
     );
   }
