@@ -1,20 +1,17 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 
-import _ from "lodash";
-
 import { NavBar } from './components/navbar';
-import { SearchPosts } from './components/search-posts';
 import PostList from './components/post-list';
 import { PostForm } from './components/post-form';
 
 class App extends Component {
-    constructor() {
+    constructor(prop) {
     super();
 
     this.state = {
       postList: [],
-      formMounted: false
+      formMounted: false,
     };
   }
 
@@ -27,8 +24,7 @@ class App extends Component {
   onChangeFormList(item) {
     let newList = Object.assign([], this.state.postList);
     newList.push(item);
-    this.setState({postList: newList});
-    console.log(this.state.postList);
+    this.setState({postList: newList, formMounted: false});
   }
 
   render() {
@@ -43,12 +39,11 @@ class App extends Component {
 
       <div className="app-root">
         <NavBar />
-        <SearchPosts />
         <div className="right-align">
           <button className="form-component-button btn-large waves-effect waves-light red"
                   onClick={ this.onChangeFormMounted.bind(this) }>
-            <span>New Post</span>
-            <i className="material-icons">add_to_photos</i>
+            <i className="tiny material-icons">tab_unselected</i>
+              <span> New Post</span>
           </button>
           <div className='form-component-mounted'>
             { formComponent }

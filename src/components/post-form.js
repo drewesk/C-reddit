@@ -23,6 +23,12 @@ export class PostForm extends Component {
   }
 
   onSubmitForm() {
+    for (const key in this.state) {
+      if (this.state[key] === '') {
+       alert('invalid input, can\'t be empty');
+       return false;
+      }
+    }
     let newItem = this.state;
     this.props.changeFormList(newItem);
   }
@@ -35,44 +41,44 @@ export class PostForm extends Component {
         <div className="row">
           <div className="input-field col s6">
             <input
-              className="validate"
               placeholder="title"
               name="title"
               type="text"
               onChange={(event) => this.onHandleInputChange(event) }/>
-            <label className="active" htmlFor="post-title">Title</label>
+            <label className="active"
+                   htmlFor="post-title">Title</label>
           </div>
 
           <div className="input-field col s6">
             <input
-              className="validate"
               placeholder="author"
               name="author"
               type="text"
               onChange={(event) => this.onHandleInputChange(event) }/>
-            <label className="active" htmlFor="author">Author</label>
+            <label className="active"
+                   htmlFor="author">Author</label>
           </div>
         </div>
 
         <div className="row">
           <div className="input-field col s6">
             <input
-              className="validate"
               placeholder="Body goes here"
               name="body"
               type="text"
               onChange={(event) => this.onHandleInputChange(event) }/>
-            <label className="active" htmlFor="body">Body</label>
+            <label className="active"
+                   htmlFor="body">Body</label>
           </div>
 
           <div className="input-field col s6">
             <input
-              className="validate"
               placeholder="URL to image"
               name="imageUrl"
               type="text"
               onChange={(event) => this.onHandleInputChange(event) }/>
-            <label className="active" htmlFor="imageUrl">Image URL</label>
+            <label className="active"
+                   htmlFor="imageUrl">Image URL</label>
           </div>
         </div>
 

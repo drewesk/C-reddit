@@ -40,6 +40,12 @@ export class Post extends Component {
     onComment(){
       let newItem = this.state.commentText;
       let newList = Object.assign([], this.state.comments);
+
+      if (newItem === '') {
+       alert('invalid input, can\'t be empty');
+       return false;
+      }
+      
       newList.push(newItem);
       this.setState({comments: newList});
       console.log(this.state.comments);
@@ -58,17 +64,15 @@ export class Post extends Component {
         <div className="comments-mounted-list">
           <CommentList commentListParent={ this.state.comments }/>
             <input
-              className="validate"
               placeholder="... first"
               name="commentText"
               type="text"
               onChange={(event) => this.onHandleCommentChange(event) }/>
-              
-              <button className="form-component-button btn-medium waves-effect waves-light red"
+
+              <a className="btn-floating btn-large waves-effect waves-light"
                       onClick={ this.onComment.bind(this) }>
-                <span>Comment</span>
-                <i className="small material-icons">filter_list</i>
-              </button>
+                <i className="large material-icons">chat</i>
+              </a>
         </div>
       );
     }
@@ -102,8 +106,9 @@ export class Post extends Component {
 
                   <span>time-elapsed</span> | <i className="medium material-icons">chat_bubble_outline</i>
 
-                  <a onClick={ this.onChangeCommentsMounted.bind(this) }>
-                    <span>Comments: { this.state.comments.length }</span>
+                  <a className="btn"
+                     onClick={ this.onChangeCommentsMounted.bind(this) }>
+                    <span className="#1a237e indigo-text text-darken-4">Comments: { this.state.comments.length }</span>
                   </a>
                   <div className="comments">
                       { commentsList }
