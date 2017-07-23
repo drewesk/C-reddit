@@ -5,9 +5,8 @@ import _ from "lodash";
 
 import { NavBar } from './components/navbar';
 import { SearchPosts } from './components/search-posts';
-import { PostList } from './components/post-list';
+import PostList  from './components/post-list';
 import { PostForm } from './components/post-form';
-import { Post } from './components/post';
 import { CommentList } from './components/comment-list';
 import { Comment } from './components/comment';
 
@@ -16,6 +15,7 @@ class App extends Component {
     super();
 
     this.state = {
+      postList: [],
       formMounted: false
     };
   }
@@ -26,11 +26,19 @@ class App extends Component {
     });
   }
 
+  onChangeFormList(item) {
+    let newList = Object.assign([], this.state.postList);
+    newList.push(item);
+    this.setState({postList: newList});
+    console.log(this.state.postList);
+  }
+
   render() {
 
     let formComponent = "";
     if(this.state.formMounted) {
-      formComponent = <PostForm />
+      formComponent = <PostForm
+                        changeFormList={ this.onChangeFormList.bind(this) }/>
     }
 
     return(
@@ -44,10 +52,7 @@ class App extends Component {
             { formComponent }
           </div>
         </div>
-        {/* <PostList /> */}
-        <Post />
-        <CommentList />
-        <Comment />
+        <PostList postListParent={ this.state.postList } />
       </div>
     );
   }

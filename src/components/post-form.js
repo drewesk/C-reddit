@@ -2,6 +2,31 @@ import React, { Component } from 'react';
 
 export class PostForm extends Component {
 
+  constructor(props) {
+  super();
+    this.state = {
+      title: '',
+      author: '',
+      body: '',
+      imageUrl: ''
+    };
+  }
+
+  onHandleInputChange(event) {
+    const target = event.target;
+    const name = target.name;
+
+    this.setState({
+      [name]: target.value
+    });
+    console.log(this.state)
+  }
+
+  onSubmitForm() {
+    let newItem = this.state;
+    this.props.changeFormList(newItem);
+  }
+
   render() {
 
     return (
@@ -9,33 +34,53 @@ export class PostForm extends Component {
 
         <div className="row">
           <div className="input-field col s6">
-            <input placeholder="Title" id="post-title" type="text" className="validate"/>
+            <input
+              className="validate"
+              placeholder="title"
+              name="title"
+              type="text"
+              onChange={(event) => this.onHandleInputChange(event) }/>
             <label className="active" for="post-title">Title</label>
           </div>
         </div>
 
         <div className="row">
           <div className="input-field col s6">
-            <input placeholder="Author" id="first_name" type="text" className="validate"/>
-            <label className="active" for="first_name">Author</label>
+            <input
+              className="validate"
+              placeholder="author"
+              name="author"
+              type="text"
+              onChange={(event) => this.onHandleInputChange(event) }/>
+            <label className="active" for="author">Author</label>
           </div>
         </div>
 
         <div className="row">
           <div className="input-field col s6">
-            <input placeholder="Content" id="post-content" type="text" className="validate"/>
-            <label className="active" for="post_content">Body</label>
+            <input
+              className="validate"
+              placeholder="Body goes here"
+              name="body"
+              type="text"
+              onChange={(event) => this.onHandleInputChange(event) }/>
+            <label className="active" for="body">Body</label>
           </div>
         </div>
 
         <div className="row">
           <div className="input-field col s6">
-            <input placeholder="image-url" id="image-url" type="text" className="validate"/>
-            <label className="active" for="image-url">Image URL</label>
+            <input
+              className="validate"
+              placeholder="URL to image"
+              name="imageUrl"
+              type="text"
+              onChange={(event) => this.onHandleInputChange(event) }/>
+            <label className="active" for="imageUrl">Image URL</label>
           </div>
         </div>
 
-        <button type="submit">Create Post</button>
+        <button onClick={ this.onSubmitForm.bind(this) }>Create Post</button>
       </div>
     );
   }
