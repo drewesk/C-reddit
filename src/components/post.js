@@ -16,36 +16,40 @@ I want to be sorted by votes, keywords, and latest
 I want to be well styled with custom CSS classes
 
 */
-import React from 'react';
+import React, { Component } from 'react';
 
-const Post = ({ item }) => {
-  const Title = item.title;
-  const Author = item.author;
-  const Body = item.body;
-  const Url = item.imageUrl;
+class Post extends Component {
+    constructor(props) {
+      super();
 
 
-  return (
-    <div className="cred-post">
-      <div className="col s12 m7">
-        <div className="card horizontal">
-          <div className="card-image">
-            <img src={ Url } height="200" width="150"/>
-          </div>
-          <div className="card-stacked">
-            <h2>{ Title } | 5votes</h2>
-            <p>{ Author }</p>
-            <div className="card-content">
-              <p>{ Body }</p>
+  }
+
+    render() {
+
+    return (
+      <div className="cred-post">
+        <div className="col s12 m7">
+          <div className="card horizontal">
+            <div className="card-image">
+              <img src={ this.props.elements.imageUrl } height="200" width="150"/>
             </div>
-            <div className="card-action">
-              <span>time-elapsed</span> | <a href="#">Comment</a>
+            <div className="card-stacked">
+              <h2>{ this.props.elements.title } | 5votes</h2>
+              <p>{ this.props.elements.author }</p>
+              <div className="card-content">
+                <p>{ this.props.elements.body }</p>
+              </div>
+              <div className="card-action">
+                <span>time-elapsed</span> | <a href="#">Comment</a>
+              </div>
             </div>
           </div>
         </div>
+
       </div>
-    </div>
-  );
+    );
+  }
 }
 
 export default Post;

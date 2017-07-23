@@ -5,7 +5,7 @@ import _ from "lodash";
 
 import { NavBar } from './components/navbar';
 import { SearchPosts } from './components/search-posts';
-import PostList  from './components/post-list';
+import PostList from './components/post-list';
 import { PostForm } from './components/post-form';
 import { CommentList } from './components/comment-list';
 import { Comment } from './components/comment';
