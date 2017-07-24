@@ -6,7 +6,9 @@ export class Comment extends Component {
 
     return (
       <div className="cred-comment">
-        <p>{ this.props.commentElements }</p>
+        <p>
+          <i className="tiny material-icons">ac_unit</i> { this.props.commentElements }
+        </p>
       </div>
     );
   }

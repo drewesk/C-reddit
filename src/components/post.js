@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Moment from 'react-moment';
 
 import CommentList from './comment-list';
 
@@ -10,6 +11,7 @@ export class Post extends Component {
         votes: 0,
         commentsMounted: false,
         comments: [],
+        dateTimestamp: Date.now()
       }
     };
 
@@ -41,11 +43,12 @@ export class Post extends Component {
       let newItem = this.state.commentText;
       let newList = Object.assign([], this.state.comments);
 
-      if (newItem === '') {
+      if (newItem == '' || newItem == undefined ||
+       newItem == null) {
        alert('invalid input, can\'t be empty');
        return false;
       }
-      
+
       newList.push(newItem);
       this.setState({comments: newList});
       console.log(this.state.comments);
@@ -59,6 +62,7 @@ export class Post extends Component {
 
     render() {
     let commentsList = '';
+
     if(this.state.commentsMounted) {
       commentsList = (
         <div className="comments-mounted-list">
@@ -87,8 +91,8 @@ export class Post extends Component {
                      width="150"/>
               </div>
               <div className="card-stacked">
-                <h2>
-                  { this.props.elements.title } | { this.state.votes }
+                <h4>
+                  { this.props.elements.title } | { this.state.votes } votes
                   <a className='vote-button'
                      onClick={ this.onUpVote.bind(this) }>
                     <i className="medium material-icons">arrow_drop_up</i>
@@ -97,14 +101,14 @@ export class Post extends Component {
                      onClick={ this.onDownVote.bind(this) }>
                     <i className="medium material-icons">arrow_drop_down</i>
                   </a>
-                </h2>
-                <div className="card-content">
+                </h4>
+                <div className="card-content hoverable #b3e5fc light-blue lighten-4">
                   <p className="cred-author">-{ this.props.elements.author }</p>
                   <p>{ this.props.elements.body }</p>
                 </div>
                 <div className="card-action">
 
-                  <span>time-elapsed</span> | <i className="medium material-icons">chat_bubble_outline</i>
+                  <span><Moment fromNow>{ console.log(this.state.dateTimestamp) }</Moment></span> | <i className="medium material-icons">chat_bubble_outline</i>
 
                   <a className="btn"
                      onClick={ this.onChangeCommentsMounted.bind(this) }>
