@@ -33,6 +33,17 @@ export class PostForm extends Component {
     this.props.changeFormList(newItem);
   }
 
+  onEditPost(item, index){
+    this.setState(
+      {
+        title: item.title,
+        author: item.Author,
+        body: item.body,
+        imageUrl: item.imageUrl
+      }
+    );
+  }
+
   render() {
 
     return (
@@ -41,6 +52,7 @@ export class PostForm extends Component {
         <div className="row">
           <div className="input-field col s6">
             <input
+              value={ this.state.title }
               placeholder="title"
               name="title"
               type="text"
@@ -51,6 +63,7 @@ export class PostForm extends Component {
 
           <div className="input-field col s6">
             <input
+              value={ this.state.author }
               placeholder="author"
               name="author"
               type="text"
@@ -63,6 +76,7 @@ export class PostForm extends Component {
         <div className="row">
           <div className="input-field col s6">
             <input
+              value={ this.state.body }
               placeholder="Body goes here"
               name="body"
               type="text"
@@ -73,6 +87,7 @@ export class PostForm extends Component {
 
           <div className="input-field col s6">
             <input
+              value={ this.state.imageUrl }
               placeholder="URL to image"
               name="imageUrl"
               type="text"

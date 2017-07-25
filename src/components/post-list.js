@@ -6,7 +6,7 @@ const PostList = (props) => {
     console.log(item);
     return (
       <li key={i} className="post-items-populate">
-         <Post elements={item}/>
+         <Post elements={item} key={ i }/>
       </li>
 
     );
