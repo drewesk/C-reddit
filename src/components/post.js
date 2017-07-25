@@ -36,7 +36,6 @@ export class Post extends Component {
       this.setState({
         [name]: target.value
       });
-      console.log(this.state)
     }
 
     onComment(){
@@ -51,7 +50,6 @@ export class Post extends Component {
 
       newList.push(newItem);
       this.setState({comments: newList});
-      console.log(this.state.comments);
     }
 
     onChangeCommentsMounted() {
@@ -108,7 +106,7 @@ export class Post extends Component {
                 </div>
                 <div className="card-action">
 
-                  <span><Moment fromNow>{ console.log(this.state.dateTimestamp) }</Moment></span> | <i className="medium material-icons">chat_bubble_outline</i>
+                  <span><Moment fromNow>{ this.state.dateTimestamp }</Moment></span> | <i className="medium material-icons">chat_bubble_outline</i>
 
                   <a className="btn"
                      onClick={ this.onChangeCommentsMounted.bind(this) }>

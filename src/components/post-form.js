@@ -19,7 +19,6 @@ export class PostForm extends Component {
     this.setState({
       [name]: target.value
     });
-    console.log(this.state)
   }
 
   onSubmitForm() {
