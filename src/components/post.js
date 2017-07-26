@@ -90,14 +90,12 @@ export class Post extends Component {
                      width="150"/>
               </div>
               <div className="card-stacked">
-                <h4>
+                <h4 className="vote-button">
                   { this.props.elements.title } | { this.state.votes } votes
-                  <a className='vote-button'
-                     onClick={ this.onUpVote.bind(this) }>
+                  <a onClick={ this.onUpVote.bind(this) }>
                     <i className="medium material-icons">arrow_drop_up</i>
                   </a>
-                  <a className='vote-button'
-                     onClick={ this.onDownVote.bind(this) }>
+                  <a onClick={ this.onDownVote.bind(this) }>
                     <i className="medium material-icons">arrow_drop_down</i>
                   </a>
                 </h4>
