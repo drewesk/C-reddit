@@ -7,8 +7,9 @@ export class Post extends Component {
     constructor(props) {
       super();
 
+      let Votes = props.postListInit[props.position].votes
       this.state = {
-        votes: 0,
+        votes:  Votes,
         commentsMounted: false,
         comments: [],
         dateTimestamp: Date.now()
@@ -19,7 +20,7 @@ export class Post extends Component {
       this.setState({
         votes: this.state.votes + 1
       });
-      console.log(this.state);
+      this.props.onVotes(this.state.votes, this.props.position);
     }
 
     onDownVote() {
@@ -27,6 +28,7 @@ export class Post extends Component {
         this.setState({
           votes: this.state.votes - 1
         });
+        this.props.onVotes(this.state.votes, this.props.key);
       }
     }
 
