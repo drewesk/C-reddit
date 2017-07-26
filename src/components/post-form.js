@@ -8,8 +8,26 @@ export class PostForm extends Component {
       title: '',
       author: '',
       body: '',
-      imageUrl: ''
+      imageUrl: '',
+      votes: 0
     };
+  }
+
+  onHandleItemPopulate(event) {
+    const pos = event.target.value;
+
+    const item = this.props.postListEdit[pos];
+    if(item) {
+      this.setState({
+        pos: pos,
+        title: item.title,
+        author: item.author,
+        body: item.body,
+        imageUrl: item.imageUrl
+      });
+    }
+
+    console.log(this.state);
   }
 
   onHandleInputChange(event) {
@@ -22,14 +40,24 @@ export class PostForm extends Component {
   }
 
   onSubmitForm() {
-    for (const key in this.state) {
-      if (this.state[key] === '') {
-       alert('invalid input, can\'t be empty');
-       return false;
+    let newItem = this.state;
+    let pos = this.state.pos;
+    let sudoItems = this.state;
+
+    delete sudoItems['pos'];
+    
+    for (const key in sudoItems) {
+        if (this.state[key] === '') {
+         alert('invalid input, can\'t be empty');
+         return false;
       }
     }
-    let newItem = this.state;
-    this.props.changeFormList(newItem);
+
+    if(pos) {
+      this.props.changeFormList(newItem, pos)
+    } else {
+      this.props.changeFormList(newItem);
+    }
   }
 
   onEditPost(item, index){
@@ -44,11 +72,31 @@ export class PostForm extends Component {
   }
 
   render() {
+    if(this.props.postListEdit.length > 0) {
+      this.state.hide = 'post-show';
+    } else {
+      this.state.hide = 'post-hidden'
+    }
 
     return (
       <div className="cred-post-form">
 
         <div className="row">
+          <div className={this.state.hide}>
+
+          <div className="pos-post">
+            <input
+              placeholder="pos"
+              name="pos"
+              type="number"
+              onChange={(event) => this.onHandleItemPopulate(event) }/>
+            <label className="active"
+                   htmlFor="post-pos">pos</label>
+          </div><br/><br/>
+
+          </div>
+
+
           <div className="input-field col s6">
             <input
               value={ this.state.title }

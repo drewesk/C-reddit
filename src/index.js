@@ -14,7 +14,27 @@ class App extends Component {
 
     this.state = {
       postRender: [],
-      postList: [],
+      postList: [{
+        title: 'Art',
+        author: 'Sarah',
+        body: 'Anything is art, if the collecter believes you.',
+        imageUrl: 'http://payload.cargocollective.com/1/1/37421/708557/One_liner.jpg',
+        votes: 5
+      },
+      {
+        title: 'Food',
+        author: 'Jacob',
+        body: 'I like Eggs...',
+        imageUrl: 'https://barilla.azureedge.net/~/media/images/en_us/hero-images/spaghetti_v2.png',
+        votes: 7
+      },
+      {
+        title: 'Home Town',
+        author: 'RandomBot',
+        body: 'Sea-Town, because it rains all of the time......',
+        imageUrl: 'http://www.pnwphotos.com/gallery/data/526/medium/467774422_7ZtNd-X3.jpg',
+        votes: 3
+      }],
       postListResult: [],
       formMounted: false,
     };
@@ -26,11 +46,25 @@ class App extends Component {
     });
   }
 
-  onChangeFormList(item) {
-    let newList = Object.assign([], this.state.postList);
-    newList.push(item);
-    this.setState({ postList: newList, formMounted: false});
-    this.setState({ postRender: newList });
+  onChangeFormList(item, pos) {
+
+    if(pos) {
+      this.state.postList.splice(pos, 1);
+
+      let newList = Object.assign([], this.state.postList);
+      newList.push(item);
+      this.setState({ postList: newList, formMounted: false});
+      this.setState({ postRender: newList });
+
+    } else {
+
+      let newList = Object.assign([], this.state.postList);
+      newList.push(item);
+      console.log(item);
+      this.setState({ postList: newList, formMounted: false});
+      this.setState({ postRender: newList });
+
+    }
   }
 
   postSearch(keyword) {
@@ -40,11 +74,9 @@ class App extends Component {
         newList.push(post);
       }
     });
-    if(keyword) {
-      this.setState({ postRender: newList });
-    } else {
-      this.setState({ postRender: this.state.postList });
-    }
+
+    this.setState({ postRender: newList });
+
     console.log(this.state.postRender);
   }
 
@@ -57,11 +89,11 @@ class App extends Component {
     let formComponent = "";
     if(this.state.formMounted) {
       formComponent = <PostForm
-                        changeFormList={ this.onChangeFormList.bind(this) }/>
+                        changeFormList={ this.onChangeFormList.bind(this) }
+                        postListEdit={ this.state.postList } />
     }
 
     return(
-
       <div className="app-root">
         <NavBar />
         <SearchBar onSearchTerm={ postSearch } />
@@ -69,13 +101,13 @@ class App extends Component {
           <button className="form-component-button btn-large waves-effect waves-light red"
                   onClick={ this.onChangeFormMounted.bind(this) }>
             <i className="tiny material-icons">tab_unselected</i>
-              <span> New Post</span>
+              <span> New/Edit Post</span>
           </button>
           <div className='form-component-mounted'>
             { formComponent }
           </div>
         </div>
-        <PostList postListParent={ this.state.postRender } />
+        <PostList postListParent={ this.state.postRender.length == 0 ? this.state.postList : this.state.postRender } />
       </div>
     );
   }

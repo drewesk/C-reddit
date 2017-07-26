@@ -19,6 +19,7 @@ export class Post extends Component {
       this.setState({
         votes: this.state.votes + 1
       });
+      console.log(this.state);
     }
 
     onDownVote() {
