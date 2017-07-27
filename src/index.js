@@ -18,7 +18,7 @@ class App extends Component {
         title: 'Art',
         author: 'Sarah',
         body: 'Anything is art, if the collecter believes you.',
-        imageUrl: 'http://payload.cargocollective.com/1/1/37421/708557/One_liner.jpg',
+        imageUrl: 'https://payload.cargocollective.com/1/1/37421/708557/One_liner.jpg',
         votes: 5
       },
       {
@@ -60,24 +60,38 @@ class App extends Component {
 
       let newList = Object.assign([], this.state.postList);
       newList.push(item);
-      console.log(item);
       this.setState({ postList: newList, formMounted: false});
       this.setState({ postRender: newList });
 
     }
   }
 
+  onSetVotes(newVotes, pos) {
+
+    console.log(newVotes, pos);
+
+    let selectedItems = this.state.postList.map((post, i) => {
+      console.log("new votes:" + post.votes, "i:" + i);
+      if(pos == i) {
+        post.votes = newVotes;
+      }
+      return post;
+    })
+
+    this.setState({ postList: selectedItems });
+  }
+
   postSearch(keyword) {
+
     let newList = [];
     this.state.postList.map((post, i) => {
       if(post.title.toLowerCase().includes(keyword.toLowerCase())) {
         newList.push(post);
       }
+
     });
 
     this.setState({ postRender: newList });
-
-    console.log(this.state.postRender);
   }
 
   render() {
@@ -107,7 +121,9 @@ class App extends Component {
             { formComponent }
           </div>
         </div>
-        <PostList postListParent={ this.state.postRender.length == 0 ? this.state.postList : this.state.postRender } />
+        <PostList voteInit={ this.state.postList }
+                  votes={ this.onSetVotes.bind(this) }
+                  postListParent={ this.state.postRender.length == 0 ? this.state.postList : this.state.postRender } />
       </div>
     );
   }
