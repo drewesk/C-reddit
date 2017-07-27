@@ -7,9 +7,8 @@ export class Post extends Component {
     constructor(props) {
       super();
 
-      let Votes = props.postListInit[props.position].votes
       this.state = {
-        votes:  Votes,
+        votes:  props.postListInit[props.position].votes,
         commentsMounted: false,
         comments: [],
         dateTimestamp: Date.now()

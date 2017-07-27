@@ -68,10 +68,7 @@ class App extends Component {
 
   onSetVotes(newVotes, pos) {
 
-    console.log(newVotes, pos);
-
     let selectedItems = this.state.postList.map((post, i) => {
-      console.log("new votes:" + post.votes, "i:" + i);
       if(pos == i) {
         post.votes = newVotes;
       }
@@ -79,6 +76,21 @@ class App extends Component {
     })
 
     this.setState({ postList: selectedItems });
+  }
+
+  onFilterVotes() {
+    const newList = (votes) => {
+        return function(post, nextPost) {
+            return nextPost[votes] > post[votes];
+        }
+    }
+
+    const voteListResult = this.state.postList.sort(newList('votes'));
+
+    console.log(voteListResult);
+
+    this.setState({ postList: voteListResult });
+
   }
 
   postSearch(keyword) {
@@ -111,6 +123,10 @@ class App extends Component {
       <div className="app-root">
         <NavBar />
         <SearchBar onSearchTerm={ postSearch } />
+        <div className="left-align">
+          <button className='btn-large'
+                  onClick={ this.onFilterVotes.bind(this) }>filter by votes</button>
+        </div>
         <div className="right-align">
           <button className="form-component-button btn-large waves-effect waves-light red"
                   onClick={ this.onChangeFormMounted.bind(this) }>
