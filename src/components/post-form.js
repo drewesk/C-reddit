@@ -14,12 +14,12 @@ export class PostForm extends Component {
   }
 
   onHandleItemPopulate(event) {
-    const pos = event.target.value;
+    const numInp = event.target.value;
 
-    const item = this.props.postListEdit[pos];
+    const item = this.props.postListEdit[numInp];
     if(item) {
       this.setState({
-        pos: pos,
+        pos: numInp,
         title: item.title,
         author: item.author,
         body: item.body,
@@ -45,7 +45,7 @@ export class PostForm extends Component {
     let sudoItems = this.state;
 
     delete sudoItems['pos'];
-    
+
     for (const key in sudoItems) {
         if (this.state[key] === '') {
          alert('invalid input, can\'t be empty');

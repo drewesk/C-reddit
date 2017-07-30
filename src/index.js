@@ -5,7 +5,7 @@ import _ from 'lodash';
 
 import { NavBar } from './components/navbar';
 import { SearchBar } from './components/search-bar';
-import PostList from './components/post-list';
+import { PostList } from './components/post-list';
 import { PostForm } from './components/post-form';
 
 class App extends Component {
@@ -14,27 +14,7 @@ class App extends Component {
 
     this.state = {
       postRender: [],
-      postList: [{
-        title: 'Art',
-        author: 'Sarah',
-        body: 'Anything is art, if the collecter believes you.',
-        imageUrl: 'https://payload.cargocollective.com/1/1/37421/708557/One_liner.jpg',
-        votes: 5
-      },
-      {
-        title: 'Food',
-        author: 'Jacob',
-        body: 'I like Eggs...',
-        imageUrl: 'https://barilla.azureedge.net/~/media/images/en_us/hero-images/spaghetti_v2.png',
-        votes: 7
-      },
-      {
-        title: 'Home Town',
-        author: 'RandomBot',
-        body: 'Sea-Town, because it rains all of the time......',
-        imageUrl: 'http://www.pnwphotos.com/gallery/data/526/medium/467774422_7ZtNd-X3.jpg',
-        votes: 3
-      }],
+      postList: [],
       postListResult: [],
       formMounted: false,
     };
@@ -66,16 +46,29 @@ class App extends Component {
     }
   }
 
-  onSetVotes(newVotes, pos) {
+  onUpVotePost(pos) {
 
-    let selectedItems = this.state.postList.map((post, i) => {
-      if(pos == i) {
-        post.votes = newVotes;
+    let newList = this.state.postList.map((post, i) => {
+      if(pos == i){
+        post.votes += 1;
       }
       return post;
-    })
+    });
+    this.setState({ postList: newList });
+  }
 
-    this.setState({ postList: selectedItems });
+  onDownVotePost(pos) {
+
+    let newList = this.state.postList.map((post, i) => {
+      if(pos == i){
+        if(post.votes > 0) {
+          post.votes -= 1;
+        }
+      }
+      return post;
+    });
+
+    this.setState({ postList: newList });
   }
 
   onFilterVotes() {
@@ -85,7 +78,7 @@ class App extends Component {
         }
     }
 
-    const voteListResult = this.state.postList.sort(newList('votes'));
+    const voteListResult = this.state.postRender.sort(newList('votes'));
 
     console.log(voteListResult);
 
@@ -116,8 +109,10 @@ class App extends Component {
     if(this.state.formMounted) {
       formComponent = <PostForm
                         changeFormList={ this.onChangeFormList.bind(this) }
-                        postListEdit={ this.state.postList } />
+                        postListEdit={ this.state.postList }
+                        />
     }
+
 
     return(
       <div className="app-root">
@@ -137,9 +132,10 @@ class App extends Component {
             { formComponent }
           </div>
         </div>
-        <PostList voteInit={ this.state.postList }
-                  votes={ this.onSetVotes.bind(this) }
-                  postListParent={ this.state.postRender.length == 0 ? this.state.postList : this.state.postRender } />
+        <PostList listInit={ this.state.postList }
+                  UpVotePost={ this.onUpVotePost.bind(this) }
+                  downVotePost={ this.onDownVotePost.bind(this) }
+                  />
       </div>
     );
   }

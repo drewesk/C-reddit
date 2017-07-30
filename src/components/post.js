@@ -8,28 +8,13 @@ export class Post extends Component {
       super();
 
       this.state = {
-        votes:  props.postListInit[props.position].votes,
+        position: props.position,
+        votes:  props.postList.votes,
         commentsMounted: false,
         comments: [],
         dateTimestamp: Date.now()
       }
     };
-
-    onUpVote() {
-      this.setState({
-        votes: this.state.votes + 1
-      });
-      this.props.onVotes(this.state.votes, this.props.position);
-    }
-
-    onDownVote() {
-      if(this.state.votes > 0) {
-        this.setState({
-          votes: this.state.votes - 1
-        });
-        this.props.onVotes(this.state.votes, this.props.key);
-      }
-    }
 
     onHandleCommentChange(event) {
       const target = event.target;
@@ -51,7 +36,7 @@ export class Post extends Component {
       }
 
       newList.push(newItem);
-      this.setState({comments: newList});
+      this.setState({ comments: newList });
     }
 
     onChangeCommentsMounted() {
@@ -81,6 +66,7 @@ export class Post extends Component {
       );
     }
 
+
       return (
         <div className="cred-post">
           <div className="col s12 m7">
@@ -93,12 +79,12 @@ export class Post extends Component {
               <div className="card-stacked">
                 <h4 className="vote-button">
                   { this.props.elements.title } | { this.state.votes } votes
-                  <a onClick={ this.onUpVote.bind(this) }>
+                  <button onClick={ this.props.upVote(this.state.position).bind(this) }>
                     <i className="medium material-icons">arrow_drop_up</i>
-                  </a>
-                  <a onClick={ this.onDownVote.bind(this) }>
+                  </button>
+                  <button onClick={ this.props.downVote(this.state.position).bind(this) }>
                     <i className="medium material-icons">arrow_drop_down</i>
-                  </a>
+                  </button>
                 </h4>
                 <div className="card-content hoverable #b3e5fc light-blue lighten-4">
                   <p className="cred-author">-{ this.props.elements.author }</p>
